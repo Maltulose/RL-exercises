@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/cs-HP4TU)
+>>>>>>> 909c89079fbfe9682144fa222ec7f9c84fbdab9f
 # RL_exercises
 Welcome to the RL exercises repository! You will work with this repository for the duration of the course, so please take your time to familiarize yourself with its structure.
 
