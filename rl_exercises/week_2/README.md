@@ -6,7 +6,11 @@ You should add your solutions to the central train and eval script.
 
 ## Level 1
 ### 1. The MarsRover Environment
+<<<<<<< HEAD
 In the `mars_rover_env.py` file you’ll find the first environment we’ll work with: the MarsRover. 
+=======
+In the `../environments.py` (in the parent folder) file you’ll find the first environment we’ll work with: the MarsRover. 
+>>>>>>> e4532dcfcf7725b75ea456164c89d2cb7ef678b7
 You have seen it as an example in the lecture: the agent can move left or right with each step and should ideally move to the rightmost state. 
 Your task here is to implement the environment dynamics `get_next_state` and determine
 the transition matrix `get_transition_matrix`. This is needed for the algorithms policy and value iteration.
@@ -46,4 +50,8 @@ python rl_exercises/train_agent.py +exercise=w2_value_iteration
 What happens if you only have access to `step()` instead of the dynamics and reward? Do both methods still work? This setting will be what we'll work with for the rest of the semester.
 
 ## Level 3
+<<<<<<< HEAD
 Implement Generalized Policy Iteration from the Sutton & Barto book. It is different from your Level 2 solution? Can you match the performance of policy and value iteration?
+=======
+Implement Generalized Policy Iteration from the Sutton & Barto book. It is different from your Level 2 solution? Can you match the performance of policy and value iteration?
+>>>>>>> e4532dcfcf7725b75ea456164c89d2cb7ef678b7
