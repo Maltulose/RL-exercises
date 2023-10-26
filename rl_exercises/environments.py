@@ -107,7 +107,11 @@ class MarsRover(gymnasium.Env):
             Next state.
         """
         # TODO Implement logic of getting next state
-        s_next = s
+        actual_action = a if self.rng.random() < p else 1 - a
+
+        delta_s = -1 if actual_action == 0 else 1
+        s_next = max(0, min(len(S) - 1, s + delta_s))
+
         return s_next
 
     def get_transition_matrix(self, S: np.ndarray, A: np.ndarray, P: np.ndarray) -> np.ndarray:
@@ -131,6 +135,14 @@ class MarsRover(gymnasium.Env):
         """
         T = np.zeros((len(S), len(A), len(S)))
         # TODO Build transition matrix
+        for s in range(len(S)):
+            for a in range(len(A)):
+                s_next = self.get_next_state(s, a, S, P[s][a])
+                T[s, a, s_next] += P[s, a]
+
+                if P[s, a] < 1:
+                    s_opposite = self.get_next_state(s, 1 - a, S, 1)  # get the opposite action's next state
+                    T[s, a, s_opposite] += 1 - P[s, a]
         return T
 
     def reset(self, *, seed: int | None = None, options: dict[str, Any] | None = None) -> tuple[Any, dict[str, Any]]:
