@@ -141,7 +141,7 @@ def do_policy_evaluation(
     S, A, T, R_sa, gamma = MDP
 
     steps: int = 0
-    V : np.ndarray = np.zeros_like(S, dtype=float)
+    V: np.ndarray = np.zeros_like(S, dtype=float)
 
     while True:
         V_prev = V.copy()
