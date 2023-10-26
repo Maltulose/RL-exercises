@@ -163,6 +163,12 @@ def determine_pi(V: np.ndarray, seed: int | None = None) -> Callable:
             Action
         """
         action: int = 0
+
+        if rng.random() > 0.5:
+            action = np.argmax(V[s])
+        else:
+            action = rng.choice([0, 1])
+
         return action  # type: ignore[return-value]
 
     return pi
@@ -196,5 +202,12 @@ def update_value_function(
     """
     S, A, T, R_sa, gamma = MDP
     converged: bool = False
+
+    V_prev = V.copy()
+    for s in S:
+        V[s] = max([R_sa[s, a] + gamma * np.sum([T[s, a, s_prime] * V_prev[s_prime] for s_prime in S]) for a in A])
+
+    delta = np.max(np.abs(V - V_prev))
+    converged = delta < epsilon
 
     return V, converged

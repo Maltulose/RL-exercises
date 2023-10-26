@@ -141,7 +141,21 @@ def do_policy_evaluation(
     S, A, T, R_sa, gamma = MDP
 
     steps: int = 0
+    V = np.zeros_like(S, dtype=float)
 
+    while True:
+        V_prev = V.copy()
+
+        for s in range(len(S)):
+            V[s] = R_sa[s, pi[s]] + gamma * np.sum(T[s, pi[s], :] * V_prev)
+
+            for a in range(len(A)):
+                Q[s, a] = R_sa[s, a] + gamma * np.sum(T[s, a, :] * V_prev)
+
+        steps += 1
+
+        if np.max(np.abs(V - V_prev)) < epsilon:
+            break
     return Q, steps
 
 
@@ -169,6 +183,15 @@ def do_policy_improvement(
         Pi, converged.
     """
     converged: bool = False
+    pi_prev = pi.copy()
+
+    # For each state, update the policy to the action that maximizes the Q-value
+    pi = np.argmax(Q, axis=1)
+
+    if np.max(np.abs(pi - pi_prev)) < epsilon:
+        converged = True
+    else:
+        converged = False
 
     return pi, converged
 
@@ -204,6 +227,18 @@ def do_policy_iteration(
     """
     converged: bool = False  # noqa: F841
     steps: int = 0
+
+    while True:
+        Q, evaluation_steps = do_policy_evaluation(Q, pi, MDP, epsilon)
+
+        steps += evaluation_steps
+
+        pi, policy_converged = do_policy_improvement(Q, pi, epsilon)
+
+        steps += 1
+
+        if policy_converged:
+            break
 
     return Q, pi, steps
 
