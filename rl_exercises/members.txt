@@ -1,3 +1,3 @@
 member 1: Malte Herrmann
 member 2: Tom Schockemöhle
-member 3: ChatGPT
+member 3: Abbas
