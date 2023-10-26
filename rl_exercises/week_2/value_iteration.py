@@ -165,7 +165,7 @@ def determine_pi(V: np.ndarray, seed: int | None = None) -> Callable:
         action: int = 0
 
         if rng.random() > 0.5:
-            action = np.argmax(V[s])
+            action = int(np.argmax(V[s]))
         else:
             action = rng.choice([0, 1])
 
